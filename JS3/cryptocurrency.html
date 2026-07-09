@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <!-- 모바일 화면에서도 비율 깨지지 않도록 뷰포트 설정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실시간 암호화폐 가격 변동 추적기</title>
+    <link rel="stylesheet" href="cryptocurrency_style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>실시간 암호화폐 가격 변동 추적기</h1>
+
+        <!-- ===== 탭 영역: 전체보기 / 관심항목 전환 버튼 ===== -->
+        <!-- 실제 전환 로직(클릭 이벤트)은 JS 파일에서 처리함 -->
+        <div class="tabs">
+            <button id="allTab" class="tab-btn active">전체보기</button>
+            <button id="favoritesTab" class="tab-btn">⭐ 관심항목</button>
+        </div>
+
+        <!-- ===== 검색 컨트롤 영역 ===== -->
+        <div class="controls">
+            <!-- 사용자가 입력할 때마다 JS의 input 이벤트 리스너가 감지함 -->
+            <input type="text" id="searchInput" placeholder="심볼 검색 (예: BTC)">
+        </div>
+
+        <!-- 데이터를 불러올 때마다 JS가 이 텍스트를 갱신함 -->
+        <p id="lastUpdated" class="last-updated"></p>
+
+        <!-- 데이터를 아직 못 불러왔을 때만 보이는 로딩 문구 -->
+        <div id="loading" class="loading">데이터를 불러오는 중...</div>
+
+        <!-- 실제 코인 목록이 표시되는 테이블. 로딩 끝나기 전까지는 hidden 클래스로 숨김 -->
+        <!-- th마다 data-sort 속성을 붙여두면, JS가 클릭 이벤트에서 어떤 기준으로 정렬할지 알 수 있음 -->
+        <table id="cryptoTable" class="hidden">
+            <thead>
+                <tr>
+                    <th data-sort="favorite">관심 <span class="sort-arrows"><span class="arrow-up">▲</span><span class="arrow-down">▼</span></span></th>
+                    <th data-sort="symbol">심볼 <span class="sort-arrows"><span class="arrow-up">▲</span><span class="arrow-down">▼</span></span></th>
+                    <th data-sort="price">현재가 (USDT) <span class="sort-arrows"><span class="arrow-up">▲</span><span class="arrow-down">▼</span></span></th>
+                    <th data-sort="change">24시간 변동률 <span class="sort-arrows"><span class="arrow-up">▲</span><span class="arrow-down">▼</span></span></th>
+                    <th data-sort="high">최고가 <span class="sort-arrows"><span class="arrow-up">▲</span><span class="arrow-down">▼</span></span></th>
+                    <th data-sort="low">최저가 <span class="sort-arrows"><span class="arrow-up">▲</span><span class="arrow-down">▼</span></span></th>
+                </tr>
+            </thead>
+            <!-- tbody는 비워두고 JS의 renderData() 함수가 매번 <tr>을 새로 채워넣음 -->
+            <tbody id="cryptoList">
+                <!-- 데이터가 여기에 동적으로 추가됩니다 -->
+            </tbody>
+        </table>
+
+        <!-- 검색어/탭 결과가 0건일 때만 JS가 hidden 클래스를 제거해서 보여줌 -->
+        <p id="noResult" class="no-result hidden">검색 결과가 없습니다.</p>
+    </div>
+
+    <!-- body 맨 아래에서 스크립트를 불러와야 위의 DOM 요소들이 먼저 생성된 뒤 JS가 실행됨 -->
+    <script src="cryptocurrency.js"></script>
+</body>
+</html>

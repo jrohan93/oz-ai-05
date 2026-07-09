@@ -1,0 +1,192 @@
+/* ===== 전체 페이지 기본 스타일 ===== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: whitesmoke;
+    margin: 0;
+    padding: 20px;
+    color: dimgray;
+}
+
+/* 실제 콘텐츠를 감싸는 흰색 카드 영역 (가운데 정렬 + 그림자로 입체감) */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: darkslategray;
+}
+
+/* ===== 탭 버튼 영역 ===== */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: gainsboro;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: background-color 0.3s; /* 클릭 시 색이 부드럽게 바뀌도록 */
+}
+
+/* JS에서 클릭된 탭에 이 클래스를 붙여서 현재 선택된 탭을 표시함 */
+.tab-btn.active {
+    background-color: darkslategray;
+    color: white;
+}
+
+/* active 상태가 아닌 버튼에만 hover 효과 적용 (active 버튼은 그대로 유지) */
+.tab-btn:hover:not(.active) {
+    background-color: lightgray;
+}
+
+/* ===== 검색창 + 정렬 드롭다운 영역 ===== */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap; /* 화면이 좁아지면 다음 줄로 넘어가도록 */
+}
+
+#searchInput {
+    width: 100%;
+    max-width: 350px;
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#sortSelect {
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* 마지막 업데이트 시각 표시 문구 (작고 은은하게) */
+.last-updated {
+    text-align: center;
+    font-size: 13px;
+    color: gray;
+    margin-bottom: 15px;
+}
+
+/* ===== 코인 목록 테이블 ===== */
+table {
+    width: 100%;
+    border-collapse: collapse; /* 셀 사이 이중 테두리 제거 */
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid whitesmoke;
+}
+
+th {
+    background-color: ghostwhite;
+    color: gray;
+    font-weight: 600;
+    cursor: pointer;       /* 클릭해서 정렬할 수 있다는 걸 시각적으로 알려줌 */
+    user-select: none;     /* 클릭할 때 텍스트가 드래그로 선택되는 것 방지 */
+}
+
+/* 헤더에 마우스를 올리면 살짝 배경색이 바뀌도록 (클릭 가능함을 강조) */
+th:hover {
+    background-color: lavender;
+}
+
+/* 오름차순/내림차순 화살표를 감싸는 영역 */
+.sort-arrows {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: middle;
+    line-height: 8px;
+    margin-left: 4px;
+}
+
+/* 화살표 기본 상태: 옅은 색 (선택되지 않음) */
+.sort-arrows .arrow-up,
+.sort-arrows .arrow-down {
+    font-size: 10px;
+    color: lightgray;
+}
+
+/* 오름차순으로 정렬 중일 때 위쪽 화살표만 진하게 */
+.sort-arrows .arrow-up.active {
+    color: darkslategray;
+}
+
+/* 내림차순으로 정렬 중일 때 아래쪽 화살표만 진하게 */
+.sort-arrows .arrow-down.active {
+    color: darkslategray;
+}
+
+/* 마우스를 올린 행을 살짝 강조 (가독성용) */
+tr:hover {
+    background-color: lavender;
+}
+
+/* 관심항목 별 아이콘 버튼 (기본 상태: 회색 빈 별) */
+.fav-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: lightgray;
+}
+
+/* 즐겨찾기된 코인은 이 클래스가 붙어서 노란 별로 표시됨 */
+.fav-btn.active {
+    color: gold;
+}
+
+/* 버튼 클릭 시 생기는 파란 테두리(포커스 아웃라인) 제거 */
+.fav-btn:focus {
+    outline: none;
+}
+
+/* 심볼(코인 이름) 텍스트 강조 */
+.symbol {
+    font-weight: bold;
+    color: darkslategray;
+}
+
+/* 24시간 변동률 색상: 상승은 빨강, 하락은 파랑 (국내 주식 표기 관례) */
+.up {
+    color: crimson;
+    font-weight: bold;
+}
+
+.down {
+    color: dodgerblue;
+    font-weight: bold;
+}
+
+/* 로딩 문구 / 검색결과 없음 문구 공통 스타일 */
+.loading, .no-result {
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    color: gray;
+}
+
+/* JS에서 classList.add('hidden') / remove('hidden')으로 요소를 보이거나 숨길 때 사용 */
+.hidden {
+    display: none;
+}
